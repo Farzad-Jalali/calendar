@@ -135,7 +135,7 @@ class RangeCalendar extends React.Component {
       firstSelectedValue: null,
       hoverValue: props.hoverValue || [],
       value,
-      showTimePicker: false,
+      showTimePicker: props.mode && props.mode[0] === 'time' && props.mode[1] === 'time',
       mode: props.mode || ['date', 'date'],
       panelTriggerSource: '', // Trigger by which picker panel: 'start' & 'end'
     };
@@ -736,7 +736,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onStartPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker || mode[0] === 'time'}
+              showTimePicker={showTimePicker}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
@@ -758,7 +758,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onEndPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker || mode[1] === 'time'}
+              showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
@@ -782,7 +782,7 @@ class RangeCalendar extends React.Component {
                 {props.timePicker ?
                   <TimePickerButton
                     {...props}
-                    showTimePicker={showTimePicker || (mode[0] === 'time' && mode[1] === 'time')}
+                    showTimePicker={showTimePicker}
                     onOpenTimePicker={this.onOpenTimePicker}
                     onCloseTimePicker={this.onCloseTimePicker}
                     timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
